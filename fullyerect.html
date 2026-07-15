@@ -39,7 +39,7 @@
             z-index: 2;
             width: 460px;
             padding: 40px;
-            background: rgba(0, 0, 0, 0.93); /* Solid dark box - no photos behind */
+            background: rgba(0, 0, 0, 0.93);
             border-radius: 18px;
             box-shadow: 0 15px 45px rgba(0,0,0,0.8);
         }
@@ -56,6 +56,12 @@
             font-size: 1.02em;
             cursor: pointer; 
         }
+        a { 
+            color: #4da6ff; 
+            text-decoration: underline; 
+            font-weight: bold;
+        }
+        a:hover { color: #80c1ff; }
         button {
             width: 100%;
             padding: 15px;
@@ -68,14 +74,11 @@
             cursor: pointer;
         }
         button:hover { background: #218838; }
-        a { color: #4da6ff; text-decoration: underline; }
-        a:hover { color: #80c1ff; }
     </style>
 </head>
 <body>
     <div class="collage" id="collage"></div>
 
-    <!-- Poll Box with solid background -->
     <div class="poll-area">
         <div class="title">
             <h1>2026 Fully Erect Fantasy Football</h1>
@@ -96,9 +99,9 @@
             <label><input type="checkbox" name="q2"> Saturdays in August</label>
         </div>
 
-        <div>
+        <div style="margin-bottom:32px">
             <h2>3. Click here to nominate a new commissioner</h2>
-            <a href="https://youtu.be/IJmIGC0nwK0?t=41" target="_blank">Click here</a>
+            <p><a href="https://youtu.be/IJmIGC0nwK0?t=41" target="_blank">Click here</a></p>
         </div>
        
         <button onclick="submitPoll()">Submit My Votes</button>
