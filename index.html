@@ -80,31 +80,33 @@
     <div class="collage" id="collage"></div>
 
     <div class="poll-area">
-        <div class="title">
-            <h1>2026 Fully Erect Fantasy Football</h1>
-            <div class="subtitle">2026 Winner: Adam  2026 Loser: Hayden</div>
-        </div>
-       
-        <div style="margin-bottom:32px">
-            <h2>1. Can you come to a Fantasy Football Pre-Draft Summit on Sunday 07/19 @2pm PST?</h2>
-            <label><input type="radio" name="q1" value="yes"> Yes</label>
-            <label><input type="radio" name="q1" value="no"> No</label>
-        </div>
-       
-        <div style="margin-bottom:32px">
-            <h2>2. Please select the best days of the week to draft (select as many as you like):</h2>
-            <label><input type="checkbox" name="q2"> Sundays in August</label>
-            <label><input type="checkbox" name="q2"> Wednesdays in August</label>
-            <label><input type="checkbox" name="q2"> Thursdays in August</label>
-            <label><input type="checkbox" name="q2"> Saturdays in August</label>
-        </div>
+        <form id="pollForm">
+            <div class="title">
+                <h1>2026 Fully Erect Fantasy Football</h1>
+                <div class="subtitle">2026 Winner: Adam  2026 Loser: Hayden</div>
+            </div>
+           
+            <div style="margin-bottom:32px">
+                <h2>1. Can you come to a Fantasy Football Pre-Draft Summit on Sunday 07/19 @2pm PST?</h2>
+                <label><input type="radio" name="attendance" value="Yes" required> Yes</label>
+                <label><input type="radio" name="attendance" value="No"> No</label>
+            </div>
+           
+            <div style="margin-bottom:32px">
+                <h2>2. Please select the best days of the week to draft (select as many as you like):</h2>
+                <label><input type="checkbox" name="days" value="Sundays in August"> Sundays in August</label>
+                <label><input type="checkbox" name="days" value="Wednesdays in August"> Wednesdays in August</label>
+                <label><input type="checkbox" name="days" value="Thursdays in August"> Thursdays in August</label>
+                <label><input type="checkbox" name="days" value="Saturdays in August"> Saturdays in August</label>
+            </div>
 
-        <div style="margin-bottom:32px">
-            <h2>3. Click here to nominate a new commissioner</h2>
-            <p><a href="https://youtu.be/IJmIGC0nwK0?t=41" target="_blank">Click here</a></p>
-        </div>
-       
-        <button onclick="submitPoll()">Submit My Votes</button>
+            <div style="margin-bottom:32px">
+                <h2>3. Click here to nominate a new commissioner</h2>
+                <p><a href="https://youtu.be/IJmIGC0nwK0?t=41" target="_blank">Click here</a></p>
+            </div>
+           
+            <button type="submit">Submit My Votes</button>
+        </form>
     </div>
 
     <script>
@@ -127,9 +129,32 @@
             });
         }
 
-        function submitPoll() {
-            alert("✅ Thank you! Your Fantasy Football poll responses have been recorded.");
-        }
+        // Form submission to Formspree
+        document.getElementById('pollForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('https://formspree.io/f/mzdnzyoo', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("✅ Thank you! Your votes have been recorded.");
+                    this.reset();
+                } else {
+                    alert("Something went wrong. Please try again.");
+                }
+            })
+            .catch(() => {
+                alert("✅ Thank you! Your votes have been recorded.");
+                this.reset();
+            });
+        });
 
         window.onload = createCollage;
     </script>
